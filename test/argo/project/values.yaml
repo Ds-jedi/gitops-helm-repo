@@ -2,3 +2,5 @@ spec:
   project:
     project1:
       name: jenkins
+    project2:
+      name: nginx
