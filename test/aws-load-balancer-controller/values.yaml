@@ -18,7 +18,7 @@ serviceAccount:
   create: true
   # Annotations to add to the service account
   annotations: 
-    eks.amazonaws.com/role-arn: arn:aws:iam::086041644501:role/dev-demo-stage-eks-aws-lb-controller
+    eks.amazonaws.com/role-arn: arn:aws:iam::085393171208:role/dev-demo-stage-eks-aws-lb-controller
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
   name: aws-load-balancer-controller

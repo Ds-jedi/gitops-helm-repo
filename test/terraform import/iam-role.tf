@@ -10,12 +10,12 @@ resource "aws_iam_role" "test_role" {
                     ]
                     Condition = {
                         StringEquals = {
-                            "oidc.eks.us-east-1.amazonaws.com/id/F64BB2C4FA185017AF7D6E7BB0E4CE91:sub" = "system:serviceaccount:kube-system:aws-load-balancer-controller"
+                            "oidc.eks.us-east-1.amazonaws.com/id/79B234E29A2EE00F015751963DDE2015:sub" = "system:serviceaccount:kube-system:aws-load-balancer-controller"
                         }
                     }
                     Effect    = "Allow"
                     Principal = {
-                        Federated = "arn:aws:iam::086041644501:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/F64BB2C4FA185017AF7D6E7BB0E4CE91"
+                        Federated = "arn:aws:iam::085393171208:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/79B234E29A2EE00F015751963DDE2015"
                     }
                     Sid       = ""
                 },
@@ -27,7 +27,7 @@ resource "aws_iam_role" "test_role" {
     force_detach_policies = false
     #id                    = "dev-demo-stage-eks-aws-lb-controller"
     managed_policy_arns   = [
-        "arn:aws:iam::086041644501:policy/dev-demo-stage-eks-aws-lb-controller",
+        "arn:aws:iam::085393171208:policy/dev-demo-stage-eks-aws-lb-controller",
     ]
     max_session_duration  = 43200
     name                  = "dev-demo-stage-eks-aws-lb-controller"

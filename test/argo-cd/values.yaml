@@ -158,7 +158,7 @@ configs:
     annotations: {}
 
     # -- Argo CD's externally facing base URL (optional). Required when configuring SSO
-    url: "http://argocd.devops-labs.online"
+    url: {}
 
     # -- The name of tracking label used by Argo CD for resource pruning
     # @default -- Defaults to app.kubernetes.io/instance
@@ -239,7 +239,7 @@ configs:
 
     ## Server properties
     # -- Run server without TLS
-    server.insecure: false
+    server.insecure: true
     # -- Value for base href in index.html. Used if Argo CD is running behind reverse proxy under subpath different from /
     server.basehref: /
     # -- Used if Argo CD is running behind reverse proxy under subpath different from /
@@ -1899,17 +1899,17 @@ server:
     enabled: true
     # -- Additional ingress annotations
     annotations: 
-    #     alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
-    #     alb.ingress.kubernetes.io/certificate-arn: 'arn:aws:acm:us-east-1:995515626231:certificate/ad0d099b-0c16-43c2-84bf-96bc9926ea02'
-    #     alb.ingress.kubernetes.io/group.name: my-common-alb-ingress
-        alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+        alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
+        alb.ingress.kubernetes.io/certificate-arn: 'arn:aws:acm:us-east-1:085393171208:certificate/db07c3e2-e759-4eaa-9311-4fa4d4f5c7bf'
+        alb.ingress.kubernetes.io/group.name: my-common-alb-ingress
+        alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80},{"HTTPS": 443}]'
         alb.ingress.kubernetes.io/scheme: 'internet-facing'
         alb.ingress.kubernetes.io/healthcheck-interval-seconds: '60'
         alb.ingress.kubernetes.io/healthcheck-path: '/'
         alb.ingress.kubernetes.io/healthcheck-timeout-seconds: '30'
-    #     alb.ingress.kubernetes.io/ssl-redirect: '443'
-    #     alb.ingress.kubernetes.io/tags: Environment=stage
-    #     alb.ingress.kubernetes.io/healthcheck-protocol: HTTPS
+        alb.ingress.kubernetes.io/ssl-redirect: '443'
+        alb.ingress.kubernetes.io/tags: Environment=stage
+        alb.ingress.kubernetes.io/healthcheck-protocol: HTTPS
     # -- Additional ingress labels
     labels: {}
     # -- Defines which ingress controller will implement the resource
