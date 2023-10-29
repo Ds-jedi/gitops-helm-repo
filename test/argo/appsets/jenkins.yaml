@@ -15,6 +15,7 @@ spec:
           key: github-token
         labels:
         - deploy # label on PR that trigger review app
+      requeueAfterSeconds: 30
   template:
     metadata:
       name: 'foo-dev-frontend-{{branch}}-{{number}}'
