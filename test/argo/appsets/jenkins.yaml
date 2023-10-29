@@ -1,36 +1,33 @@
+---
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: jenkins
+  name: foo-dev-review-frontend
   namespace: argocd
 spec:
   generators:
-  - list:
-      elements:
-      - cluster: jenkins
-        url: https://kubernetes.default.svc
+  - pullRequest:
+      github:
+        owner: Ds-jedi
+        repo: gitops-helm-repo # This is the application source code repo
+        tokenRef:
+          secretName: github-token
+          key: github-token
+        labels:
+        - deploy # label on PR that trigger review app
   template:
     metadata:
-      name: "jenkins"
+      name: 'foo-dev-frontend-{{branch}}-{{number}}'
     spec:
-      project: jenkins
       source:
         repoURL: git@github.com:Ds-jedi/gitops-helm-repo.git
-        targetRevision: release
-        path: helm/ml
+        targetRevision: main
+        path: apps-deploy/nginx
         helm:
-          releaseName: jenkins
+          releaseName: nginx
           valueFiles:
            - values.yaml
+      project: jenkins
       destination:
         server: https://kubernetes.default.svc
-        namespace: jenkins
-      syncPolicy:
-#        automated:
-#          prune: true
-#          selfHeal: true
-        syncOptions:
-          - CreateNamespace=true
-          - Replace=true
-  syncPolicy:
-    preserveResourcesOnDeletion: true
+        namespace: 'foo-dev-frontend-{{branch}}-{{number}}'

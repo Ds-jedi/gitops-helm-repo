@@ -1900,7 +1900,7 @@ server:
     # -- Additional ingress annotations
     annotations: 
         alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
-        alb.ingress.kubernetes.io/certificate-arn: 'arn:aws:acm:us-east-1:085393171208:certificate/db07c3e2-e759-4eaa-9311-4fa4d4f5c7bf'
+        alb.ingress.kubernetes.io/certificate-arn: 'arn:aws:acm:us-east-1:521525530234:certificate/37742a3d-e077-4770-8715-4137cf6e8037'
         alb.ingress.kubernetes.io/group.name: my-common-alb-ingress
         alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80},{"HTTPS": 443}]'
         alb.ingress.kubernetes.io/scheme: 'internet-facing'
