@@ -1,0 +1,20 @@
+spec:
+  service_name: &service_name "internal-dev-ingress"
+
+
+ingress:
+  enabled: true
+  host: "*.devops-labs.online"
+  path: /
+  pathType: Prefix
+  annotations:
+    alb.ingress.kubernetes.io/healthcheck-interval-seconds: '60'
+    alb.ingress.kubernetes.io/healthcheck-path: '/'
+    alb.ingress.kubernetes.io/healthcheck-timeout-seconds: '30'
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+    alb.ingress.kubernetes.io/scheme: 'internal'
+    alb.ingress.kubernetes.io/tags: Environment=dev
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/group.name: internal-ALB
+    alb.ingress.kubernetes.io/group.order: '1'
+    alb.ingress.kubernetes.io/subnets: subnet-0e133424e800723, subnet-32434243dce8dbe
