@@ -1,4 +1,4 @@
-{{- if .Values.ml_app.ingress.enabled }}
+{{- if .Values.nginx.ingress.enabled }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -6,11 +6,11 @@ metadata:
   labels:
     app: {{ .Values.spec.service_name }}
   annotations:
-    {{- toYaml .Values.ml_app.ingress.annotations | nindent 4 }}
+    {{- toYaml .Values.nginx.ingress.annotations | nindent 4 }}
 spec:
-  ingressClassName: {{ .Values.ml_app.ingress.ingressClassName }}
+  ingressClassName: {{ .Values.nginx.ingress.ingressClassName }}
   rules:
-    - host: {{ .Values.ml_app.ingress.host }}
+    - host: {{ .Values.nginx.ingress.host }}
       http:
         paths:
           - backend:
@@ -18,6 +18,6 @@ spec:
                 name: {{ .Values.spec.service_name }}
                 port:
                   number: 80
-            path: {{ .Values.ml_app.ingress.path }}
-            pathType: {{ .Values.ml_app.ingress.pathType }}
+            path: {{ .Values.nginx.ingress.path }}
+            pathType: {{ .Values.nginx.ingress.pathType }}
 {{- end }}

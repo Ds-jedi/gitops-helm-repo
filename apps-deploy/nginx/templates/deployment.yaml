@@ -5,8 +5,8 @@ metadata:
     app: {{ .Values.spec.service_name }}
   name: {{ .Values.spec.service_name }}
 spec:
-  {{- if not .Values.ml_app.autoscaling.enabled }}
-  replicas: {{ .Values.ml_app.deployment.replicaCount }}
+  {{- if not .Values.nginx.autoscaling.enabled }}
+  replicas: {{ .Values.nginx.deployment.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
@@ -20,8 +20,8 @@ spec:
     spec:
       containers:
       - name: {{ .Values.spec.service_name }}
-        image: "{{ .Values.ml_app.deployment.image.repository }}:{{ .Values.ml_app.deployment.image.tag }}"
+        image: "{{ .Values.nginx.deployment.image.repository }}:{{ .Values.nginx.deployment.image.tag }}"
         ports:
-        - containerPort: {{ .Values.ml_app.service.targetport }}
+        - containerPort: {{ .Values.nginx.service.targetport }}
         resources:
-          {{- toYaml .Values.ml_app.deployment.resources | nindent 10 }}
+          {{- toYaml .Values.nginx.deployment.resources | nindent 10 }}
