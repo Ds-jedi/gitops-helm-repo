@@ -5,7 +5,7 @@ jenkins:
   deployment:
     replicaCount: 1
     image:
-      repository: jenkins
+      repository: jenkins/jenkins
       pullPolicy: IfNotPresent
       # Overrides the image tag whose default is the chart appVersion.
       tag: "latest"
