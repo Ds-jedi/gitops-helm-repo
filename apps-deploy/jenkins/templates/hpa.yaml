@@ -1,0 +1,29 @@
+---
+{{- if .Values.jenkins.autoscaling.enabled }}
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ .Values.spec.module_name }}
+  labels:
+    app: {{ .Values.spec.module_name }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ .Values.spec.module_name }}
+  minReplicas: {{ .Values.jenkins.autoscaling.minReplicas }}
+  maxReplicas: {{ .Values.jenkins.autoscaling.maxReplicas }}
+  metrics:
+    {{- if .Values.jenkins.autoscaling.targetCPUUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: {{ .Values.jenkins.autoscaling.targetCPUUtilizationPercentage }}
+    {{- end }}
+    {{- if .Values.jenkins.autoscaling.targetMemoryUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: memory
+        targetAverageUtilization: {{ .Values.jenkins.autoscaling.targetMemoryUtilizationPercentage }}
+    {{- end }}
+{{- end }}

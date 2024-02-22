@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.spec.service_name }}
+  name: {{ .Values.spec.service_name }}
+spec:
+  {{- if not .Values.jenkins.autoscaling.enabled }}
+  replicas: {{ .Values.jenkins.deployment.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      app: {{ .Values.spec.service_name }}
+  template:
+    metadata:
+      annotations:
+        'consul.hashicorp.com/connect-inject': 'false'
+      labels:
+        app: {{ .Values.spec.service_name }}
+    spec:
+      containers:
+      - name: {{ .Values.spec.service_name }}
+        image: "{{ .Values.jenkins.deployment.image.repository }}:{{ .Values.jenkins.deployment.image.tag }}"
+        ports:
+        - containerPort: {{ .Values.jenkins.service.targetport }}
+        resources:
+          {{- toYaml .Values.jenkins.deployment.resources | nindent 10 }}
