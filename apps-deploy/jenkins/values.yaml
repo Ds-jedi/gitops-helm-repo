@@ -26,7 +26,7 @@ jenkins:
   service:
     name: *service_name
     app: *service_name
-    targetport: 80
+    targetport: 8080
 
   probes:
    readinessProbe:
