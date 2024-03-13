@@ -1,0 +1,8 @@
+{{- if .Values.spec.serviceaccount.enabled }}
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations: {{ toYaml .Values.spec.serviceaccount.annotations | nindent 4 }}
+  name: {{ .Values.spec.serviceaccount.name }}
+  namespace: external-secrets
+{{- end }}

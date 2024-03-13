@@ -10,6 +10,6 @@
   serviceAccount:
     create: true
     annotations:
-      eks.amazonaws.com/role-arn: arn:aws:iam::063544445412:role/aws-load-balancer-controller
+      eks.amazonaws.com/role-arn: arn:aws:iam::109175216201:role/alb-controller-irsa-role
     name: aws-load-balancer-controller
     automountServiceAccountToken: true

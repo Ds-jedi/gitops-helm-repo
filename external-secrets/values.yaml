@@ -1,0 +1,47 @@
+spec:
+  serviceaccount:
+    enabled: true
+    name: external-secrets-sa
+    annotations:
+      eks.amazonaws.com/role-arn: &role arn:aws:iam::109175216201:role/external-secrets-stage-irsa-role
+
+  role: *role
+  region: us-east-1
+
+"external-secrets":
+  installCRDs: false
+  crds:
+    # -- If true, create CRDs for Cluster External Secret.
+    createClusterExternalSecret: false
+    # -- If true, create CRDs for Cluster Secret Store.
+    createClusterSecretStore: false
+  leaderElect: false
+
+
+  replicaCount: 1
+
+  podAnnotations:
+   consul.hashicorp.com/connect-inject: 'false'
+
+  serviceAccount:
+    create: true
+
+  webhook:
+    replicaCount: 1
+    certCheckInterval: "5m"
+
+    podAnnotations:
+      consul.hashicorp.com/connect-inject: 'false'
+  
+    serviceAccount:
+      create: true
+
+  certController:
+    requeueInterval: "5m"
+    replicaCount: 1
+
+    podAnnotations:
+      consul.hashicorp.com/connect-inject: 'false'
+
+    serviceAccount:
+      create: true
